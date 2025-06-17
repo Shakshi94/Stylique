@@ -30,7 +30,7 @@ const Footer = () => {
         </div>
 
         {/* Contact Section */}
-        <div className="text-center sm:text-left">
+        <div className="sm:text-left">
           <p className="text-xl font-semibold mb-5 text-black text-center">GET IN TOUCH</p>
           <ul className="flex flex-col gap-1 text-center">
             <li><strong>Phone:</strong> XXXXX-XXXXX</li>
