@@ -11,7 +11,7 @@ const SideBar = ({mobileOpen, setMobileOpen}) => {
       {/* Desktop Sidebar */}
       <div className="hidden md:flex flex-col w-64 bg-gray-800 min-h-screen">
         <div className="flex items-center justify-center h-16 bg-gray-900">
-          <span className="text-white font-bold uppercase">Sidebar</span>
+          <span className="text-white font-bold uppercase">STYLIQUE</span>
         </div>
         <div className="flex flex-col flex-1 overflow-y-auto">
           <nav className="flex-1 px-2 py-4 bg-gray-800 space-y-2">
