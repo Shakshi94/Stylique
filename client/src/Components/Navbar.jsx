@@ -1,62 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import MenuIcon from '@mui/icons-material/Menu';
+
 const Navbar = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <div className="flex items-center justify-between py-5 font-medium">
-      <Link to="/" className="w-36" >
+
+      {/* Logo */}
+      <Link to="/" className="text-xl font-bold tracking-wide">
         STYLIQUE
       </Link>
 
-      <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
-        <Link to="/" aria-current="page" className="flex flex-col items-center gap-1 active">
+      {/* Desktop Nav (only shown on lg and above) */}
+      <ul className="hidden lg:flex gap-5 text-sm text-gray-700">
+        <Link to="/" className="flex flex-col items-center gap-1">
           <p>HOME</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         </Link>
         <Link to="/collection" className="flex flex-col items-center gap-1">
           <p>COLLECTION</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         </Link>
         <Link to="#" className="flex flex-col items-center gap-1">
           <p>ABOUT</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         </Link>
-        <Link to="/contact" className="flex flex-col items-center gap-1">
+        <Link to="#" className="flex flex-col items-center gap-1">
           <p>CONTACT</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         </Link>
       </ul>
 
+      {/* Icons + Hamburger */}
       <div className="flex items-center gap-6">
-        <img src="data:image/png;base64,..." className="w-5 cursor-pointer" alt="Profile" />
+        {/* These icons are hidden on small screens, shown on lg and above */}
+        <SearchIcon className="w-5 cursor-pointer" />
+        <Link to="/signin">
+          <PersonIcon className="w-5 cursor-pointer" />
+        </Link>
+        <Link to="/cart" className="relative">
+          <ShoppingCartIcon className="w-5 min-w-5" />
+          <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
+            0
+          </p>
+        </Link>
 
-        <div className="group relative">
-          <img src="data:image/png;base64,..." className="w-5 cursor-pointer" alt="Search" />
+        {/* Hamburger Menu (only on small screens, hidden on lg and above) */}
+        <div className='md:hidden'>
+          <MenuIcon
+            className="w-6 cursor-pointer"
+            onClick={() => setMobileOpen(true)}
+          />
         </div>
-
-        <a href="/cart" className="relative">
-          <img src="data:image/png;base64,..." className="w-5 min-w-5" alt="Cart" />
-          <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">0</p>
-        </a>
-
-        <img src="data:image/png;base64,..." className="w-5 cursor-pointer sm:hidden" alt="Menu" />
       </div>
 
-      <div className="absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all w-0">
-        <div className="flex flex-col text-gray-600">
-          {/* Back Button */}
-          <div className="flex items-center gap-4 p-3 cursor-pointer">
-            <img src="data:image/png;base64,..." className="h-4 rotate-180" alt="Back Icon" />
-            <p>Back</p>
-          </div>
-
-          {/* Mobile Nav Links */}
-          <Link to="/" aria-current="page" className="py-2 pl-6 border active">HOME</Link>
-          <Link to="/collection" className="py-2 pl-6 border">COLLECTION</Link>
-          <Link to="/about" className="py-2 pl-6 border">ABOUT</Link>
-          <Link to="/contact" className="py-2 pl-6 border">CONTACT</Link>
+      {/* Mobile Sidebar Menu */}
+      <div className={`fixed top-0 right-0 w-full h-[100%] bg-white shadow-lg transform transition-transform duration-300 z-50 ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex items-center gap-4 p-4 border-b cursor-pointer" onClick={() => setMobileOpen(false)}>
+          <ArrowBackIosIcon className="h-4 rotate-180" />
+          <p>Back</p>
+        </div>
+        <div className="flex flex-col text-gray-700 font-medium">
+          <Link to="/" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>HOME</Link>
+          <Link to="/collection" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>COLLECTION</Link>
+          <Link to="#" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>ABOUT</Link>
+          <Link to="#" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>CONTACT</Link>
         </div>
       </div>
     </div>

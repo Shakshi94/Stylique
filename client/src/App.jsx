@@ -11,6 +11,7 @@ import Cart from './Pages/Cart';
 function App() {
 
   return (
+    <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
     <BrowserRouter>
         <Navbar />
       <Routes>
@@ -22,6 +23,7 @@ function App() {
       </Routes>
       <Footer />
     </BrowserRouter>
+    </div>
   )
 }
 
