@@ -3,7 +3,7 @@ import {userSignIn} from '../api/index';
 import {useDispatch} from 'react-redux';
 import {loginSuccess} from '../redux/reducers/userSlice';
 import {Link,useNavigate} from 'react-router-dom';
-
+import Swal from 'sweetalert2';
 
 const SignIn = () => {
   const [formData, setFormData] = React.useState({
@@ -14,7 +14,10 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-      setFormData({...formData, [e.target.name]: e.target.value});
+      setFormData({
+        ...formData, 
+        [e.target.name]: e.target.value
+      });
     }
 
   const handleSubmit = async (e) => {
@@ -24,11 +27,34 @@ const SignIn = () => {
         dispatch(loginSuccess({user: response.data.user}));
         if(response.data.user.role === 'admin') {
            navigate('/admin/dashboard');
+           Swal.fire({
+            icon: 'success',
+            title: 'Welcome to the Admin Dashboard',
+            timer: 2000,
+            showConfirmButton: false,
+          });
         }else if(response.data.user.role === 'user') {
            navigate('/');
+           Swal.fire({
+            icon: 'success',
+            title: 'Login Successful,Welcome to Home Page',
+            timer: 2000,
+            showConfirmButton: false,
+          });
         }
       } else {
-        alert(response.data.message || 'Login failed. Please try again.');
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: response.data.message || "Wrong credentials",
+          timer: 2500,
+          showConfirmButton: false,
+        });
+        setFormData({
+          email: '',
+          password: ''
+        });
       }
   }
 

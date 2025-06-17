@@ -15,6 +15,9 @@ import EditProduct from './Pages/Admin/EditProduct'
 import UploadProduct from './Pages/Admin/UploadProduct';
 import ShowProduct from './Pages/Admin/ShowProduct';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
 
   return (
