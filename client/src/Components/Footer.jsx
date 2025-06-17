@@ -3,7 +3,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 
 const Footer = () => {
   return (
-    <div className="my-10 mt-40 text-sm text-gray-600">
+    <div className="my-10 mt-40 text-sm text-gray-600 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14">
         
         {/* Company Description */}

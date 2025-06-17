@@ -8,22 +8,37 @@ import Home from './Pages/Home';
 import Collection from './Pages/Collection';
 import Cart from './Pages/Cart';
 
+import UserLayout from './Layouts/UserLayout';
+import AdminLayout from './Layouts/AdminLayout';
+import AdminDashboard from './Pages/Admin/Admin.Dashboard';
+import EditProduct from './Pages/Admin/EditProduct'
+import UploadProduct from './Pages/Admin/UploadProduct';
+import ShowProduct from './Pages/Admin/ShowProduct';
+
 function App() {
 
   return (
-    <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
     <BrowserRouter>
-        <Navbar />
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/collection" element={<Collection/>} />
-        <Route path="/cart" element={<Cart/>} />
-        <Route path="/signin" element={<SignIn/>} />
-        <Route path="/signup" element={<SignUp/>} />
+        {/* // User Routes */}
+        <Route element={<UserLayout />}>
+          <Route path="/" element={<Home/>} />
+          <Route path="/collection" element={<Collection/>} />
+          <Route path="/cart" element={<Cart/>} />
+          <Route path="/signup" element={<SignUp/>} />
+          <Route path="/signin" element={<SignIn/>} />
+
+        </Route>
+        {/* // Admin Routes */}
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/addproduct" element={<UploadProduct  />} />
+          <Route path="/admin/showproducts" element={<ShowProduct />} />
+          <Route path="/admin/editproducts" element={<EditProduct />} />
+          <Route path="/signin" element={<SignIn/>} />
+        </Route>
       </Routes>
-      <Footer />
     </BrowserRouter>
-    </div>
   )
 }
 
