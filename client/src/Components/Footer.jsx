@@ -8,7 +8,7 @@ const Footer = () => {
         
         {/* Company Description */}
         <div>
-          <div className="mb-5 text-2xl font-bold text-black companyname">STYLIQUE</div>
+          <div className="mb-5 text-2xl font-bold text-black">STYLIQUE</div>
           <p className="w-full md:w-2/3">
             STYLIQUE Fashion is your go-to destination for bold, contemporary style.
             From sleek bodycon dresses to everyday essentials, we blend modern design 
