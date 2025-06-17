@@ -6,7 +6,10 @@ const app = express();
 const userRoutes = require('./routes/user.routes');
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173", // your React frontend
+    credentials: true
+  }));
 app.use(express.json());
 
 databaseConnection();

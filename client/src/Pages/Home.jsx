@@ -9,7 +9,11 @@ import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 
+
+
+
 const  Home  = () => {
+
     return (
       <div>
           <div className="flex flex-col sm:flex-row border border-gray-400">
