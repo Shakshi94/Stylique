@@ -4,8 +4,14 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { useOutletContext } from 'react-router-dom';
 import { addProduct } from '../../api/index';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 const  UploadProduct = () => {
+
       const { setMobileOpen } = useOutletContext();
+      const admin = useSelector((state) => state.user.currentUser);
+      const navigate = useNavigate();
 
       // Optional: Form state if you want to handle it
       const [product, setProduct] = useState({
@@ -34,38 +40,44 @@ const  UploadProduct = () => {
           setProduct({ ...product, [name]: value });
         }
       };
-    
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!validateInput()) return;
-        const formData = new FormData();
-        formData.append('name', product.name);
-        formData.append('desc', product.desc);
-        formData.append('price', product.price);
-        formData.append('sizes', JSON.stringify(product.sizes.split(',').map(s => s.trim())));
-        formData.append('categories', JSON.stringify(product.categories.split(',').map(s => s.trim())));
-        formData.append('image', product.image);
-    
-        try {
-          const res = await addProduct(formData);
-          if(res.data.success){
-            alert("Product added Successfully");
-          }else{
-            alert(res.data.message);
+      
+      
+        const handleSubmit = async (e) => {
+          e.preventDefault();
+          if(!admin){
+            navigate("/signin");
+            alert("Your are not Sign In");
           }
-          setProduct({
-            name: '',
-          desc: '',
-          price: '',
-          sizes: '',
-          categories: '',
-          image: null,
-         });
-        } catch (err) {
-          console.error(err.response?.data || err.message);
+          else{
+          if (!validateInput()) return;
+          const formData = new FormData();
+          formData.append('name', product.name);
+          formData.append('desc', product.desc);
+          formData.append('price', product.price);
+          formData.append('sizes', JSON.stringify(product.sizes.split(',').map(s => s.trim())));
+          formData.append('categories', JSON.stringify(product.categories.split(',').map(s => s.trim())));
+          formData.append('image', product.image);
+      
+          try {
+            const res = await addProduct(formData);
+            if(res.data.success){
+              alert("Product added Successfully");
+            }else{
+              alert(res.data.message);
+            }
+            setProduct({
+              name: '',
+            desc: '',
+            price: '',
+            sizes: '',
+            categories: '',
+            image: null,
+          });
+          } catch (err) {
+            console.error(err.response?.data || err.message);
+          }
         }
-      };
-    
+        };
     return (
         <div className="flex flex-col flex-1 overflow-y-auto">
         <div className="flex items-center justify-between h-16 bg-white border-b border-gray-200">

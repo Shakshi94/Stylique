@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link,useNavigate } from 'react-router-dom';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; // Ensure this package is installed
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -8,10 +9,12 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import {useDispatch} from 'react-redux';
 import {logout} from '../redux/reducers/userSlice';
 import { userLogout } from '../api/index';
-
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 const SideBar = ({mobileOpen, setMobileOpen}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const admin = useSelector((state) => state.user.currentUser);
+
   const handleLogout = async () => {
      const response = await userLogout();
      
@@ -41,10 +44,18 @@ const SideBar = ({mobileOpen, setMobileOpen}) => {
                 <VisibilityIcon className="h-6 w-6 mr-2" /> 
               Product List
             </Link>
+            { admin==null ? (
+            <Link to="/signin"  className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+             <AdminPanelSettingsIcon  className="h-6 w-6 mr-2" />
+             Sign in
+            </Link>
+            ):(
             <button className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700" onClick={handleLogout}>
               <LogoutIcon className="h-6 w-6 mr-2"/>
               Log out
             </button>
+            )
+            }
           </nav>
         </div>
       </div>
@@ -59,7 +70,12 @@ const SideBar = ({mobileOpen, setMobileOpen}) => {
           <Link to="/admin/dashboard" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>DASHBOARD</Link>
           <Link to="/admin/addproduct" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>ADD PRODUCT</Link>
           <Link to="/admin/showproducts" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>SHOW PRODUCT</Link>
-          <button className="py-3 pl-6 border-b hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>LOG OUT</button>  
+          {admin==null ? (
+            <Link to="/login" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>LOG IN</Link> 
+          ):(        
+            <button className="py-3 pl-6 border-b hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>LOG OUT</button>  
+          )
+          }
         </div>
       </div>
     </>

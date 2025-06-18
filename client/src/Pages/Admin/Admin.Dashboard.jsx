@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 const AdminDashboard = () => {
   const { setMobileOpen } = useOutletContext();
-  const user = useSelector((state) => state.user.currentUser);
+  const admin = useSelector((state) => state.user.currentUser);
   return (
       <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex items-center justify-between h-16 bg-white border-b border-gray-200">
@@ -25,10 +25,10 @@ const AdminDashboard = () => {
               </div>
           </div>
           <div className="p-5">
-                <h1 className="text-2xl font-bold">Welcome, {user?.name || 'Guest'} 👋</h1>
+                <h1 className="text-2xl font-bold">Welcome, {admin?.name || 'Guest'} 👋</h1>
                 {/* You can access other user info too */}
-                <p>Email: {user?.email}</p>
-                <p>Role: {user?.role}</p>
+                <p>Email: {admin?.email}</p>
+                <p>Role: {admin?.role}</p>
            </div>
       </div>
   )
