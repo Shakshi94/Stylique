@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Footer from './Components/Footer';
-import Navbar from './Components/Navbar';
+
 import SignIn from './Components/SignIn';
 import SignUp from './Components/SignUp';
 
@@ -14,9 +13,8 @@ import AdminDashboard from './Pages/Admin/Admin.Dashboard';
 import EditProduct from './Pages/Admin/EditProduct'
 import UploadProduct from './Pages/Admin/UploadProduct';
 import ShowProduct from './Pages/Admin/ShowProduct';
+import ProductDetails from './Pages/ProductDetails'
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -27,6 +25,7 @@ function App() {
         <Route element={<UserLayout />}>
           <Route path="/" element={<Home/>} />
           <Route path="/collection" element={<Collection/>} />
+          <Route path="/collection/:id" element={<ProductDetails/>} />
           <Route path="/cart" element={<Cart/>} />
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/signin" element={<SignIn/>} />

@@ -1,6 +1,7 @@
 const User = require('../modal/user.modal.js');
 const { createSecretToken } = require('../utils/secretToken');
 const bcrypt = require('bcryptjs');
+const Product = require('../modal/product.modal.js');
 
 module.exports.register = async (req, res) => {
   try {
@@ -88,3 +89,27 @@ module.exports.logout = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error', error: err.message });
   }
 };
+
+module.exports.getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.status(201).json(products);
+  } catch (err) {
+    res.status(500).json({ message: "Internal server error", error: err.message });
+  }
+};
+
+module.exports.getProduct = async (req, res) => {
+  try {
+
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    res.status(201).json(product);
+  } catch (err) {
+    res.status(500).json({ message: "Internal server error", error: err.message });
+  }
+};
+
+  

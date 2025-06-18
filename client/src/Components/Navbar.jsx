@@ -10,11 +10,11 @@ import {useDispatch, useSelector } from 'react-redux';
 import {logout} from '../redux/reducers/userSlice';
 import { userLogout } from '../api/index';
 
-
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const user = useSelector((state) => state.user.currentUser);
-  
+  const cartitems = useSelector(state => state.cart.items);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -31,7 +31,7 @@ const Navbar = () => {
 
       {/* Logo */}
       <Link to="/" className="text-xl font-bold tracking-wide">
-        STYLIQUE
+        Stylique
       </Link>
 
       {/* Desktop Nav (only shown on lg and above) */}
@@ -66,7 +66,7 @@ const Navbar = () => {
         <Link to="/cart" className="relative">
           <ShoppingCartIcon className="w-5 min-w-5" />
           <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-            0
+            {cartitems.length}
           </p>
         </Link>
         {/* Hamburger Menu (only on small screens, hidden on lg and above) */}

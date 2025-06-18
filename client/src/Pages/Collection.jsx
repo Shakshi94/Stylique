@@ -1,11 +1,28 @@
-import React from 'react';
-import product1 from '../assets/latestProductImage/Product1.jpg';
-import product2 from '../assets/latestProductImage/Product2.jpeg';   
-import product3 from '../assets/latestProductImage/product3.webp';
-import product4 from '../assets/latestProductImage/product4.jpeg';
-import product5 from '../assets/latestProductImage/product5.jpeg';
+import React, { useEffect,useState } from 'react';
+import {showProducts} from '../api/index'
+import {Link,useNavigate} from 'react-router-dom';
 
 const Collection = () => {
+
+  const [product,setProduct] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const { data } = await showProducts();
+        setProduct(data);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+  
+    fetchProducts();
+  }, []);
+  
+  const handleClick = (id) => {
+    navigate(`/collection/${id}`);
+  };
+
   return (
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t">
       {/* Sidebar */}
@@ -68,41 +85,31 @@ const Collection = () => {
           </select>
         </div>
 
-        {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-          {[product1, product2, product5, product3, product4].map((img, idx) => {
-            const names = [
-              'Midnight Muse Bodycon',
-              'Blush Bloom Bodycon',
-              'Noir Nights Mini Bodycon',
-              'Pastel Muse Bodycon',
-              'Emerald Allure Bodycon'
-            ];
-            const prices = ['Rs.1999', 'Rs.1999', 'Rs.1999', 'Rs.2999', 'Rs.1899'];
-
-            return (
-              <a
-                key={idx}
-                className="text-gray-700 cursor-pointer block"
-                href="#"
-              >
-                <div className="overflow-hidden rounded-lg shadow-sm">
-                  <img
-                    src={img}
-                    alt={names[idx]}
-                    className="w-full h-56 sm:h-60 md:h-64 lg:h-72 object-cover hover:scale-110 transition-transform duration-300 ease-in-out"
-                  />
-                </div>
-                <p className="pt-3 pb-1 text-sm sm:text-base md:text-lg font-medium truncate">
-                  {names[idx]}
-                </p>
-                <p className="text-sm sm:text-base md:text-lg font-semibold">
-                  {prices[idx]}
-                </p>
-              </a>
-            );
-          })}
+          {product.map((item) => (
+            <div
+              key={item._id}
+              className="text-gray-700 cursor-pointer block"
+              onClick={() => handleClick(item._id)}
+            >
+              <div className="overflow-hidden rounded-lg shadow-sm">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-56 sm:h-60 md:h-64 lg:h-72 object-cover hover:scale-110 transition-transform duration-300 ease-in-out"
+                />
+              </div>
+              <p className="pt-3 pb-1 text-sm sm:text-base md:text-lg font-medium truncate">
+                {item.name}
+              </p>
+              <p className="text-sm sm:text-base md:text-lg font-semibold">
+                Rs.
+                {item.price}
+              </p>
+            </div>
+          ))}
         </div>
+
       </div>
     </div>
   );

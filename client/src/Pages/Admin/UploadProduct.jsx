@@ -52,15 +52,15 @@ const  UploadProduct = () => {
             alert("Product added Successfully");
           }else{
             alert(res.data.message);
-            setProduct({
-              name: '',
-            desc: '',
-            price: '',
-            sizes: '',
-            categories: '',
-            image: null,
-           });
           }
+          setProduct({
+            name: '',
+          desc: '',
+          price: '',
+          sizes: '',
+          categories: '',
+          image: null,
+         });
         } catch (err) {
           console.error(err.response?.data || err.message);
         }
