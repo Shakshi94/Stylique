@@ -1,0 +1,124 @@
+const Product = require('../modal/product.modal.js');
+const  mongoose = require( "mongoose");
+
+//   try {
+//       const productData = req.body;
+//       const {name, desc, image, price, sizes,categories } = productData;
+//       if(!name || !desc || !image || !price || !sizes || !categories){
+//         return res.status(400).json({ message: 'Missing required product fields' });
+//       }
+//       const product = new Product(
+//         { 
+//             name, 
+//             desc, 
+//             image, 
+//             price, 
+//             sizes, 
+//             categories
+//         }
+//     );
+//     const createdProduct = await product.save();
+
+//     return res.status(201).json({ message: "Products added successfully", createProduct });
+
+//   } catch (err) {
+
+//     res.status(500).json({ message: "Internal server error", error: err.message });
+
+//   }
+// };
+const upload = require('../cloudConfig.js');
+
+module.exports.addProduct = async (req, res) => {
+  try {
+
+    const productData = req.body;
+    const { name, desc, price, sizes, categories } = productData;
+    const image = req.file?.path;
+
+    console.log("req.body:", req.body);
+    console.log("req.file:", req.file);
+    
+    if (!name || !desc || !image || !price || !sizes || !categories) {
+      return res.status(400).json({ message: 'Missing required product fields' });
+    }
+
+    const product = new Product({
+      name,
+      desc,
+      image,
+      price,
+      sizes,
+      categories
+    });
+
+    const createdProduct = await product.save();
+
+    return res.status(201).json({ message: "Product added successfully", success: true, product: createdProduct });
+
+  } catch (err) {
+    return res.status(500).json({ message: "Internal server error", error: err.message });
+  }
+};
+
+module.exports.getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.status(201).json(products);
+  } catch (err) {
+    res.status(500).json({ message: "Internal server error", error: err.message });
+  }
+};
+
+
+module.exports.updateProduct = async (req,res) => {
+    try {
+        const { id } = req.params;
+    
+        if (!mongoose.isValidObjectId(id)) {
+          return res.status(400).json({ message: "Invalid product ID" });
+        }
+    
+        const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
+          new: true,
+          runValidators: true,
+          upsert:false,
+        });
+    
+        if (!updatedProduct) {
+          return res.status(404).json({ message: "Product not found" });
+        }
+    
+        return res.status(200).json({
+          message: "Product updated successfully",
+          product: updatedProduct,
+          success: true,
+        });
+      } catch (err) {
+        res.status(500).json({ message: "Internal server error", error: err.message });
+      }
+}
+
+module.exports.deleteProduct = async (req,res) =>{
+    try {
+        const { id } = req.params;
+    
+        if (!mongoose.isValidObjectId(id)) {
+          return res.status(400).json({ message: "Invalid product ID" });
+        }
+    
+        const deletedProduct = await Product.findByIdAndDelete(id);
+    
+        if (!deletedProduct) {
+          return res.status(404).json({ message: "Product not found" });
+        }
+    
+        return res.status(200).json({
+          message: "Product deleted successfully",
+          success: true,
+          product: deletedProduct,
+        });
+      } catch (err) {
+        res.status(500).json({ message: "Internal server error", error: err.message });
+      }
+}

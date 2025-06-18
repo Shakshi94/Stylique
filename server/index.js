@@ -4,19 +4,22 @@ const databaseConnection = require('./databaseconnection');
 const port = 5050;
 const app = express();
 const userRoutes = require('./routes/user.routes');
+const productRoutes = require('./routes/product.routes');
+const cookieParser = require('cookie-parser');
 
 // Middleware
 app.use(cors({
     origin: "http://localhost:5173", // your React frontend
     credentials: true
   }));
+  
 app.use(express.json());
-
+app.use(cookieParser());
 databaseConnection();
 
 // Routes
 app.use('/api', userRoutes);
-
+app.use('/api/product',productRoutes);
 
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`);

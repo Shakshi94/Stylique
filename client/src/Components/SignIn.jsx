@@ -1,4 +1,4 @@
-import React from 'react';
+import {React,useState} from 'react';
 import {userSignIn} from '../api/index';
 import {useDispatch} from 'react-redux';
 import {loginSuccess} from '../redux/reducers/userSlice';
@@ -6,7 +6,7 @@ import {Link,useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const SignIn = () => {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
