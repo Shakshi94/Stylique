@@ -20,44 +20,82 @@ const SignIn = () => {
       });
     }
 
-  const handleSubmit = async (e) => {
-     e.preventDefault();
-      const response = await userSignIn(formData);
-      if (response.data.success) {
-        dispatch(loginSuccess({user: response.data.user}));
-        if(response.data.user.role === 'admin') {
-           navigate('/admin/dashboard');
-           Swal.fire({
-            icon: 'success',
-            title: 'Welcome to the Admin Dashboard',
-            timer: 2000,
-            showConfirmButton: false,
-          });
-        }else if(response.data.user.role === 'user') {
-           navigate('/');
-           Swal.fire({
-            icon: 'success',
-            title: 'Login Successful,Welcome to Home Page',
-            timer: 2000,
-            showConfirmButton: false,
-          });
-        }
-      } else {
+    const validateInput = ()=>{
+      const { email, password } = formData;
+      if (!email || !password) {
+        alert("Please fill in all fields");
+        return false;
+      }
+      return true;
+    }
 
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      if (!validateInput()) return;
+      
+      try {
+        const response = await userSignIn(formData);
+
+        if (response.data.success) {
+          dispatch(loginSuccess({ user: response.data.user }));
+    
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          });
+    
+          Toast.fire({
+            icon: "success",
+            title: "Signed in successfully",
+          });
+    
+          if (response.data.user.role === "admin") {
+            navigate("/admin/dashboard");
+          } else if (response.data.user.role === "user") {
+            navigate("/");
+          }
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Login Failed",
+            text: response.data.message || "Wrong credentials",
+          });
+          setFormData({ email: '', password: '' });
+        }
+      } catch (error) {
+        // Catch network/server/authorization errors here
+        console.error("Login error:", error);
+    
+        // Customize based on HTTP status
+        let errorMessage = "An error occurred. Please try again.";
+        if (error.response) {
+          if (error.response.status === 403) {
+            errorMessage = "Access Forbidden. You don't have permission.";
+          } else if (error.response.status === 401) {
+            errorMessage = "Unauthorized. Please check your credentials.";
+          } else if (error.response.status === 404) {
+            errorMessage = "Login API not found.";
+          } else if (error.response.data?.message) {
+            errorMessage = error.response.data.message;
+          }
+        }
+    
         Swal.fire({
-          icon: 'error',
-          title: 'Login Failed',
-          text: response.data.message || "Wrong credentials",
-          timer: 2500,
-          showConfirmButton: false,
-        });
-        setFormData({
-          email: '',
-          password: ''
+          icon: "error",
+          title: "Error",
+          text: errorMessage,
         });
       }
-  }
-
+    };
+    
   return (
     <form className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800" onSubmit={handleSubmit}>
       {/* Title */}
@@ -70,6 +108,7 @@ const SignIn = () => {
       <input
         type="email"
         name="email"
+        value={formData.email}
         className="w-full px-3 py-2 border border-gray-800 focus:outline-none focus:ring-2 focus:ring-black"
         placeholder="Email"
         required
@@ -78,6 +117,7 @@ const SignIn = () => {
       <input
         type="password"
         name='password'
+        value={formData.password}
         className="w-full px-3 py-2 border border-gray-800 focus:outline-none focus:ring-2 focus:ring-black"
         placeholder="Password"
         required

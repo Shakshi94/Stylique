@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link,useNavigate} from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { userSignUp  } from '../api/index';
 
 const SignUp = () => {
@@ -18,21 +17,25 @@ const SignUp = () => {
       [name]: value
     }));
   }
+  const validateInput = ()=>{
+    const { email, password,name } = formData;
+    if (!email || !password || !name) {
+      alert("Please fill in all fields");
+      return false;
+    }
+    return true;
+  }
+
   const handleSubmit =  async (e) => {
     e.preventDefault();
     const response =await userSignUp(formData)
-
+    if (!validateInput()) return;
+    // Check if the response indicates success
     if (response.data.success){
       navigate('/signin');
     }else{
-      Swal.fire({
-        icon: 'error',
-        title: 'Account Failed to  create',
-        text: response.data.message || "invalid credentials",
-        timer: 2500,
-        showConfirmButton: false,
-      });
-
+      // If the response indicates an error, show an alert
+      alert(response.data.message || "Registration failed");
       setFormData({
         name: '',
         email: '',
@@ -56,6 +59,7 @@ const SignUp = () => {
       <input
         type="text"
         name="name"
+        value={formData.name}
         className="w-full px-3 py-2 border border-gray-800 focus:outline-none focus:ring-2 focus:ring-black"
         placeholder="Name"
         required
@@ -64,6 +68,7 @@ const SignUp = () => {
       <input
         type="email"
         name="email"
+        value={formData.email}
         className="w-full px-3 py-2 border border-gray-800 focus:outline-none focus:ring-2 focus:ring-black"
         placeholder="Email"
         required
@@ -72,6 +77,7 @@ const SignUp = () => {
       <input
         type="password"
         name="password"
+        value={formData.password}
         className="w-full px-3 py-2 border border-gray-800 focus:outline-none focus:ring-2 focus:ring-black"
         placeholder="Password"
         required
