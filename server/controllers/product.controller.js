@@ -1,32 +1,5 @@
 const Product = require('../modal/product.modal.js');
 const  mongoose = require( "mongoose");
-
-//   try {
-//       const productData = req.body;
-//       const {name, desc, image, price, sizes,categories } = productData;
-//       if(!name || !desc || !image || !price || !sizes || !categories){
-//         return res.status(400).json({ message: 'Missing required product fields' });
-//       }
-//       const product = new Product(
-//         { 
-//             name, 
-//             desc, 
-//             image, 
-//             price, 
-//             sizes, 
-//             categories
-//         }
-//     );
-//     const createdProduct = await product.save();
-
-//     return res.status(201).json({ message: "Products added successfully", createProduct });
-
-//   } catch (err) {
-
-//     res.status(500).json({ message: "Internal server error", error: err.message });
-
-//   }
-// };
 const upload = require('../cloudConfig.js');
 
 module.exports.addProduct = async (req, res) => {
