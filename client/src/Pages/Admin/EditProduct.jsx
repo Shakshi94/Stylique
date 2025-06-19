@@ -4,6 +4,7 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { useOutletContext, useParams } from 'react-router-dom';
 import { showProduct, editProduct } from '../../api/index';
+import AdminNavbar from '../../Components/AdminNavbar';
 
 const EditProduct = () => {
   const { setMobileOpen } = useOutletContext();
@@ -85,30 +86,13 @@ const EditProduct = () => {
 
   return (
     <div className="flex flex-col flex-1 overflow-y-auto bg-gray-50 min-h-screen">
-      {/* Header */}
-      <div className="flex flex-wrap items-center justify-between h-auto p-4 bg-white border-b border-gray-200">
-        <div className="flex items-center gap-4 w-full md:w-auto">
-          <button className="md:hidden text-gray-600" onClick={() => setMobileOpen(true)}>
-            <MenuIcon className="h-6 w-6" />
-          </button>
-          <input
-            className="w-full sm:w-64 border rounded-md px-4 py-2 text-sm"
-            type="text"
-            placeholder="Search"
-          />
-        </div>
-        <div className="hidden md:flex items-center gap-2">
-          <NavigateBeforeIcon className="text-gray-600" />
-          <NavigateNextIcon className="text-gray-600" />
-        </div>
-      </div>
-
+     <AdminNavbar/>
       {/* Form Section */}
       <div className="p-4 md:p-8">
         <div className="inline-flex items-center gap-2 mb-6">
-                  <h1 className="text-2xl font-semibold">Edit Product</h1>
-                  <hr className="border-none h-[1.5px] w-8 bg-gray-800" />
-          </div>
+              <h1 className="text-2xl font-semibold">Edit Product</h1>
+              <hr className="border-none h-[1.5px] w-8 bg-gray-800" />
+        </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white shadow-md rounded-lg p-6">
             {/* Left Column */}
             <div className="space-y-5">
