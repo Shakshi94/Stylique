@@ -35,7 +35,7 @@ module.exports.register = async (req, res) => {
       withCredentials: true,
        sameSite: "None",
        httpOnly: false,
-       secure:false,
+       secure:true,
     });
 
     res.status(201).json({
@@ -71,7 +71,7 @@ module.exports.login = async (req, res) => {
             withCredentials: true,
             httpOnly: false,
             sameSite: "None",
-            secure:false,
+            secure:true,
         });
         res.status(200).json({
             message: 'User logged in successful',
