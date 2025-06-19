@@ -33,13 +33,16 @@ module.exports.register = async (req, res) => {
     const token = createSecretToken(newUser._id);
     res.cookie('token', token, {
       withCredentials: true,
-      httpOnly: false,
+       sameSite: "None",
+       httpOnly: false,
+       secure:false,
     });
 
     res.status(201).json({
       message: 'User created successfully',
       success: true,
       user: newUser,
+      
     });
   } catch (err) {
     res.status(500).json({ message: 'Internal Server Error', error: err.message });
@@ -67,6 +70,7 @@ module.exports.login = async (req, res) => {
         res.cookie('token', token, {
             withCredentials: true,
             httpOnly: false,
+            sameSite: "None",
             secure:false,
         });
         res.status(200).json({
