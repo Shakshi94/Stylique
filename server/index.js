@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 
 // Middleware
 app.use(cors({
-    origin: "http://localhost:5173", // your React frontend
+    origin: "https://stylique-oque.onrender.com", // your React frontend
     credentials: true
   }));
   
