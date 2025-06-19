@@ -20,8 +20,8 @@ module.exports.verifyToken = async (req, res, next) => {
         return res.status(404).json({ message: 'User not found' });
       }
 
-      req.user = user;         // ✅ Attach user to request
-      next();                  // ✅ Move to next middleware
+      req.user = user;         //  Attach user to request
+      next();                  //  Move to next middleware
     });
 
   } catch (err) {
