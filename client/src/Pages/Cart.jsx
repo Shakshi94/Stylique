@@ -9,13 +9,13 @@ const Cart = () => {
   const {items,tempItems,totalPrice} = useSelector(state => state.cart);
   useSelector(state => console.log(state.cart));
   const dispatch = useDispatch();
-  const handleRemoveItem = (id) =>{
-    dispatch(removeCart(id));
+  const handleRemoveItem = (id,selectedSize) =>{
+    dispatch(removeCart({id,selectedSize}));
   }
 
-  const handleUpdateQuantity = (id,quantity) =>{
-    if(quantity == 0 || quantity == null) dispatch(removeCart(id));
-    dispatch(updateTempQuantity({id,quantity}));
+  const handleUpdateQuantity = (id,quantity,selectedSize) =>{
+    if(quantity == 0 || quantity == null) dispatch(removeCart({id ,selectedSize}));
+    dispatch(updateTempQuantity({id,quantity,selectedSize}));
   }
   return (
       <div className="border-t pt-14">
@@ -33,8 +33,8 @@ const Cart = () => {
         {items.length === 0 ?(
           <h2 className='text-2xl text-orange-600 text-center'>Cart is Empty</h2>
          ):(
-            items.map((item)=>(
-                <div className="py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4">
+            items.map((item,index)=>(
+                <div key={`${item._id}-${item.selectedSize}-${index}`} className="py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4">
                 <div className="flex items-start gap-6">
                   <img
                     className="w-16 sm:w-20"
@@ -45,7 +45,7 @@ const Cart = () => {
                     <p className="text-xs sm:text-lg font-medium">{item.name}</p>
                     <div className="flex items-center gap-5 mt-2">
                       <p>Rs. {item.price}</p>
-                      <p className="px-2 sm:px-3 sm:py-1 border bg-slate-50">M</p>
+                      <p className="px-2 sm:px-3 sm:py-1 border bg-slate-50">{item.selectedSize}</p>
                     </div>
                   </div>
                 </div>
@@ -53,10 +53,10 @@ const Cart = () => {
                   className="border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1"
                   type="number"
                   min="1"
-                  value={tempItems.find((tempItem) => tempItem._id == item._id)?.quantity ?? item.quantity}
-                  onChange={(e) => handleUpdateQuantity(item._id,parseInt(e.target.value))}
+                  value={tempItems.find((tempItem) => tempItem._id == item._id && tempItem.selectedSize==item.selectedSize)?.quantity ?? item.quantity}
+                  onChange={(e) => handleUpdateQuantity(item._id,parseInt(e.target.value),item.selectedSize)}
                 />
-                <DeleteIcon onClick={()=> handleRemoveItem(item._id)}/>
+                <DeleteIcon onClick={()=> handleRemoveItem(item._id,item.selectedSize)}/>
                 
               </div>
             ))

@@ -16,7 +16,7 @@ const ProductDetails = () => {
   const handleAddToCart = async () => {
     try {
       if(user!=null){
-        dispatch(addToCart(product)); // update global state
+        dispatch(addToCart({...product,selectedSize})); // update global state
         navigate("/cart");
       }
     } catch (error) {
@@ -63,7 +63,7 @@ const ProductDetails = () => {
           <div className="flex flex-col gap-4 my-8">
             <p>Select Size</p>
             <div className="flex gap-2">
-              {["S", "M", "L", "XL", "XXL"].map((size) => (
+              {product.sizes?.map((size) => (
                 <button
                   key={size}
                   onClick={() => setSelectedSize(size)}

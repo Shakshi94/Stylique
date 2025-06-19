@@ -1,11 +1,12 @@
 import React, { useEffect,useState } from 'react';
 import {showProducts} from '../api/index'
-import {Link,useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 const Collection = () => {
 
   const [product,setProduct] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {

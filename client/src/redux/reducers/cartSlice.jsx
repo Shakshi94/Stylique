@@ -10,37 +10,59 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action) => {
-        const existingitem = state.items.find(item => item._id === action.payload._id);
-        if(existingitem){
-            existingitem.quantity +=1;
-        }else{
-            state.items.push({...action.payload,quantity:1})
+      addToCart: (state, action) => {
+        const { _id, selectedSize } = action.payload;
+      
+        const existingitem = state.items.find(
+          item => item._id === _id && item.selectedSize === selectedSize
+        );
+      
+        if (existingitem) {
+          existingitem.quantity += 1;
+        } else {
+          state.items.push({ ...action.payload, quantity: 1 });
         }
-
-        state.tempItems=[...state.items];
-        state.totalPrice = state.items.reduce((sum,item) => sum + item.price*item.quantity,0);
+      
+        state.tempItems = [...state.items];
+        state.totalPrice = state.items.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
       },
+      
       updateTempQuantity: (state,action) =>{
-        const { id, quantity } = action.payload;
+        const { id, quantity, selectedSize } = action.payload;
 
-        const tempItem = state.tempItems.find(item => item._id === id);
-        const cartItem = state.items.find(item => item._id === id);
+        const tempItem = state.tempItems.find(
+          item => item._id === id && item.selectedSize === selectedSize
+        );
+        const cartItem = state.items.find(
+          item => item._id === id && item.selectedSize === selectedSize
+        );
       
         if (tempItem) {
           tempItem.quantity = quantity;
         }
-
+      
         if (cartItem) {
           cartItem.quantity = quantity;
         }
       
-        state.totalPrice = state.tempItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        state.totalPrice = state.tempItems.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
       },
 
       removeCart: (state,action)=>{
-        state.items=state.items.filter(item => item._id !== action.payload);
+        const {id,selectedSize } = action.payload;
+        state.items=state.items.filter(item => !(item._id === id && item.selectedSize === selectedSize));
         state.tempItems=[...state.items];
+
+        state.totalPrice = state.items.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
       }
 
   },

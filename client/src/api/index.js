@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://stylique-backend.onrender.com/api",
+  baseURL: "https://stylique-backend.onrender.com/api"
   // baseURL: "http://localhost:5050/api"
 });
 
