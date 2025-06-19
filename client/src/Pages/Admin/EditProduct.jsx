@@ -86,13 +86,13 @@ const EditProduct = () => {
   return (
     <div className="flex flex-col flex-1 overflow-y-auto bg-gray-50 min-h-screen">
       {/* Header */}
-      <div className="flex items-center justify-between h-16 bg-white border-b px-4 md:px-8">
+      <div className="flex flex-wrap items-center justify-between h-auto p-4 bg-white border-b border-gray-200">
         <div className="flex items-center gap-4 w-full md:w-auto">
           <button className="md:hidden text-gray-600" onClick={() => setMobileOpen(true)}>
             <MenuIcon className="h-6 w-6" />
           </button>
           <input
-            className="w-full md:w-64 border rounded-md px-4 py-2 text-sm mt-5 mb-5"
+            className="w-full sm:w-64 border rounded-md px-4 py-2 text-sm"
             type="text"
             placeholder="Search"
           />
@@ -104,14 +104,12 @@ const EditProduct = () => {
       </div>
 
       {/* Form Section */}
-      <div className="p-4 sm:p-6">
-        <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
-          <div className="mb-6">
-            <h2 className="text-2xl font-semibold text-gray-800">Edit Product</h2>
-            <p className="text-sm text-gray-500">Update your product details below.</p>
+      <div className="p-4 md:p-8">
+        <div className="inline-flex items-center gap-2 mb-6">
+                  <h1 className="text-2xl font-semibold">Edit Product</h1>
+                  <hr className="border-none h-[1.5px] w-8 bg-gray-800" />
           </div>
-
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white shadow-md rounded-lg p-6">
             {/* Left Column */}
             <div className="space-y-5">
               <div>
@@ -151,17 +149,18 @@ const EditProduct = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">Upload Image</label>
+
+                <label className="block text-sm font-medium mb-1">Upload Image (.jpg .png .jpeg)</label>
                 <input
                   type="file"
                   name="image"
                   onChange={handleChange}
                   className="w-full"
                 />
-                {typeof product.image === 'string' && (
+                {typeof product.image === "string" && (
                   <img
                     src={product.image}
-                    alt="Current"
+                    alt="Preview"
                     className="w-24 h-24 object-cover mt-2 rounded border"
                   />
                 )}
@@ -194,18 +193,16 @@ const EditProduct = () => {
                 />
               </div>
 
-              <div className="pt-2">
+              <div className="pt-3">
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+                  className="w-full bg-black text-white px-6 py-2 rounded hover:bg-gray-600 transition"
                 >
-                  Update Product
+                  Edit Product
                 </button>
               </div>
             </div>
           </form>
-
-        </div>
       </div>
     </div>
   );

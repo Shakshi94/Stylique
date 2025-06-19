@@ -81,108 +81,126 @@ const  UploadProduct = () => {
         }
         };
     return (
-        <div className="flex flex-col flex-1 overflow-y-auto">
-        <div className="flex items-center justify-between h-16 bg-white border-b border-gray-200">
-            <div className="flex items-center px-4">
-                <button className="text-gray-500 focus:outline-none focus:text-gray-700 md:hidden" onClick={() => setMobileOpen(true)}>
-                    <MenuIcon className="h-6 w-6" />
-                </button>
-                <input className="mx-4 w-full border rounded-md px-4 py-2 mt-5 mb-5" type="text" placeholder="Search"/>
-            </div>
-            <div className="flex items-center pr-4">
-                <button className="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700">
-                  <NavigateBeforeIcon className="h-6 w-6" />
-                  <NavigateNextIcon className="h-6 w-6" />
-                </button>
-            </div>
+      <div className="flex flex-col flex-1 overflow-y-auto bg-gray-50 min-h-screen">
+        {/* Header */}
+        <div className="flex flex-wrap items-center justify-between h-auto p-4 bg-white border-b border-gray-200">
+          <div className="flex items-center w-full md:w-auto mb-2 md:mb-0">
+            <button
+              className="text-gray-500 focus:outline-none md:hidden"
+              onClick={() => setMobileOpen(true)}
+            >
+              <MenuIcon className="h-6 w-6" />
+            </button>
+            <input
+              className="w-full sm:w-64 border rounded-md px-4 py-2 text-sm"
+              type="text"
+              placeholder="Search"
+            />
+          </div>
+          <div className="flex items-center">
+            <button className="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none">
+              <NavigateBeforeIcon className="h-6 w-6" />
+              <NavigateNextIcon className="h-6 w-6" />
+            </button>
+          </div>
         </div>
-        <div className="p-4">
-            <div className="inline-flex items-center gap-2 mb-5 mt-5">
-                  <p className="prata-regular text-3xl">Add Product</p>
-                  <hr className="border-none h-[1.5px] w-8 bg-gray-800"/>
-            </div> 
-            <form onSubmit={handleSubmit} className="space-y-4 max-w-xl">
-              <div>
-                <label className="block mb-1 font-medium">Product Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={product.name}
-                  onChange={handleChange}
-                  className="w-full border rounded px-4 py-2"
-                  placeholder="Enter product name"
-                  required
-                />
-              </div>
 
-              <div>
-                <label className="block mb-1 font-medium">Price</label>
-                <input
-                  type="number"
-                  name="price"
-                  value={product.price}
-                  onChange={handleChange}
-                  className="w-full border rounded px-4 py-2"
-                  placeholder="Enter price"
-                  required
-                />
-              </div>
+        {/* Form Section */}
+        <div className="p-5">
+          <div className="inline-flex items-center gap-2 mb-6">
+            <h1 className="text-2xl font-semibold">Add Product</h1>
+            <hr className="border-none h-[1.5px] w-8 bg-gray-800" />
+          </div>
 
-              <div>
-                <label className="block mb-1 font-medium">Description</label>
-                <textarea
-                  name="desc"
-                  value={product.desc}
-                  onChange={handleChange}
-                  className="w-full border rounded px-4 py-2"
-                  placeholder="Enter product description"
-                  rows="3"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block mb-1 font-medium">Sizes</label>
-                <input
-                  name="sizes"
-                  value={product.sizes}
-                  onChange={handleChange}
-                  className="w-full border rounded px-4 py-2"
-                  placeholder='Sizes e.g. "S,M,L"'
-                  required
-                />
-              </div>
-              <div>
-                <label className="block mb-1 font-medium">Categories </label>
-                <input
-                  name="categories"
-                  value={product.categories}
-                  onChange={handleChange}
-                  className="w-full border rounded px-4 py-2"
-                  placeholder='Categories e.g. "men,female"'
-                  required
-                />
-              </div>
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white shadow-md p-6"
+          >
+            <div className="col-span-1 md:col-span-2">
+              <label className="block text-sm font-medium mb-1">Product Name</label>
+              <input
+                type="text"
+                name="name"
+                value={product.name}
+                onChange={handleChange}
+                className="w-full border rounded px-4 py-2"
+                placeholder="Enter product name"
+                required
+              />
+            </div>
 
-              <div>
-                <label className="block mb-1 font-medium">Upload Image</label>
-                <input
-                  type="file"
-                  name="image"
-                  onChange={handleChange}
-                  className="w-full"
-                  required
-                />
-              </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Price</label>
+              <input
+                type="number"
+                name="price"
+                value={product.price}
+                onChange={handleChange}
+                className="w-full border rounded px-4 py-2"
+                placeholder="Enter price"
+                required
+              />
+            </div>
 
+            <div>
+              <label className="block text-sm font-medium mb-1">Sizes (comma-separated)</label>
+              <input
+                name="sizes"
+                value={product.sizes}
+                onChange={handleChange}
+                className="w-full border rounded px-4 py-2"
+                placeholder='X,L,M'
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">Categories (comma-separated)</label>
+              <input
+                name="categories"
+                value={product.categories}
+                onChange={handleChange}
+                className="w-full border rounded px-4 py-2"
+                placeholder='female,western dress'
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">Upload Image ( .jpg .png .jpeg )</label>
+              <input
+                type="file"
+                name="image"
+                onChange={handleChange}
+                className="w-full border rounded px-2 py-1"
+                required
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium mb-1">Description</label>
+              <textarea
+                name="desc"
+                value={product.desc}
+                onChange={handleChange}
+                className="w-full border rounded px-4 py-2"
+                placeholder="Enter product description"
+                rows="3"
+                required
+              />
+            </div>
+
+            <div className="md:col-span-2">
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+                className="w-full md:w-auto bg-black text-white px-6 py-2 rounded hover:bg-gray-600 transition"
               >
                 Upload Product
               </button>
-             </form>
+            </div>
+          </form>
         </div>
-        </div>
+      </div>
     );
 }
 

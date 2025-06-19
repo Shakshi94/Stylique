@@ -4,7 +4,7 @@ import Sidebar from '../Components/Sidebar'
 const AdminLayout = () => {
    const [mobileOpen, setMobileOpen] = useState(false);
   return (
-      <div className="flex h-screen bg-gray-100">
+      <div className="flex h-screen bg-gray-100 md:p-0">
         <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
         <Outlet context={{setMobileOpen}} />
       </div>

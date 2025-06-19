@@ -31,7 +31,7 @@ const Navbar = () => {
 
       {/* Logo */}
       <Link to="/" className="text-xl font-bold tracking-wide">
-        Stylique
+        STYLIQUE
       </Link>
 
       {/* Desktop Nav (only shown on lg and above) */}

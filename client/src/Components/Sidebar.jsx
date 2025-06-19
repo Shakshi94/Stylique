@@ -26,26 +26,26 @@ const SideBar = ({mobileOpen, setMobileOpen}) => {
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex flex-col w-64 bg-gray-800 min-h-screen">
-        <div className="flex items-center justify-center h-16 bg-gray-900">
+      <div className="hidden md:flex flex-col w-64 bg-gray-500 min-h-screen">
+        <div className="flex items-center justify-center h-16 bg-gray-800">
           <span className="text-white font-bold uppercase">STYLIQUE</span>
         </div>
         <div className="flex flex-col flex-1 overflow-y-auto">
-          <nav className="flex-1 px-2 py-4 bg-gray-800 space-y-2">
-            <Link to="/admin/dashboard" className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+          <nav className="flex-1 px-2 py-4 bg-gray-700 space-y-2">
+            <Link to="/admin/dashboard" className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-800">
                <DashboardIcon className="h-6 w-6 mr-2" /> 
               Dashboard
             </Link>
-            <Link to="/admin/addproduct" className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+            <Link to="/admin/addproduct" className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-800">
                 <AddIcon className="h-6 w-6 mr-2" /> 
               Add Product
             </Link>
-            <Link to="/admin/showproducts" className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+            <Link to="/admin/showproducts" className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-800">
                 <VisibilityIcon className="h-6 w-6 mr-2" /> 
               Product List
             </Link>
             { admin==null ? (
-            <Link to="/signin"  className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+            <Link to="/signin"  className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-800">
              <AdminPanelSettingsIcon  className="h-6 w-6 mr-2" />
              Sign in
             </Link>

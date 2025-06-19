@@ -56,7 +56,7 @@ function ShowProduct() {
         <MenuIcon className="h-6 w-6" />
       </button>
       <input
-        className="ml-4 w-full md:w-64 border rounded-md px-4 py-2"
+        className="w-full sm:w-64 border rounded-md px-4 py-2 text-sm"
         type="text"
         placeholder="Search"
       />
@@ -76,8 +76,8 @@ function ShowProduct() {
       <hr className="border-none h-[1.5px] w-8 bg-gray-800" />
     </div>
 
-    <table className="min-w-[700px] w-full bg-white border border-gray-200 rounded-lg shadow text-sm text-left">
-      <thead className="bg-gray-100 text-gray-700 uppercase">
+    <table className="min-w-[700px] w-full bg-white border border-gray-200 shadow text-sm text-left">
+      <thead className="bg-black  text-white uppercase">
         <tr>
           <th className="px-6 py-3">#</th>
           <th className="px-6 py-3">Name</th>

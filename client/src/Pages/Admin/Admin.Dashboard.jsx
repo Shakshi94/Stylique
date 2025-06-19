@@ -12,9 +12,9 @@ const AdminDashboard = () => {
   return (
     <div className="flex flex-col flex-1 overflow-y-auto bg-gray-50 min-h-screen">
       {/* Top Navbar */}
-      <div className="flex items-center justify-between h-16 bg-white border-b border-gray-200 px-4 sm:px-6">
+      <div className="flex flex-wrap items-center justify-between h-auto p-4 bg-white border-b border-gray-200">
         {/* Left Section: Hamburger + Search */}
-        <div className="flex items-center w-full gap-4">
+        <div className="flex items-center gap-4 w-full md:w-auto">
           <button
             className="text-gray-500 focus:outline-none md:hidden"
             onClick={() => setMobileOpen(true)}
