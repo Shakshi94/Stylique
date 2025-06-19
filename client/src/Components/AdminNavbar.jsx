@@ -1,9 +1,14 @@
 import { useOutletContext } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu'; // Make sure to import
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const AdminNavbar = () => {
   const { setMobileOpen } = useOutletContext();
-    return(
 
+  return (
+
+    <div>
       {/* Top Navbar */}
       <div className="flex flex-wrap items-center justify-between gap-2 p-4 bg-white border-b border-gray-200">
         {/* Left: Hamburger + Search */}
@@ -31,7 +36,8 @@ const AdminNavbar = () => {
           </button>
         </div>
       </div>
-    )
-}
+    </div>
+  );
+};
 
 export default AdminNavbar;
