@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import { useParams,Link,useNavigate } from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {showProduct } from '../api/index';
 import {addToCart} from '../redux/reducers/cartSlice'
 
@@ -9,13 +9,16 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [selectedSize, setSelectedSize] = useState({});
   const [product, setProduct] = useState({});
+  const user = useSelector(state => state.user.currentUser)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleAddToCart = async () => {
     try {
-      dispatch(addToCart(product)); // update global state
-      navigate("/cart");
+      if(user!=null){
+        dispatch(addToCart(product)); // update global state
+        navigate("/cart");
+      }
     } catch (error) {
       console.log("Failed to add to cart:", error);
     }

@@ -71,7 +71,7 @@ const SideBar = ({mobileOpen, setMobileOpen}) => {
           <Link to="/admin/addproduct" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>ADD PRODUCT</Link>
           <Link to="/admin/showproducts" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>SHOW PRODUCT</Link>
           {admin==null ? (
-            <Link to="/login" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>LOG IN</Link> 
+            <Link to="/signin" className="py-3 pl-6 border-b hover:bg-gray-100" onClick={() => setMobileOpen(false)}>LOG IN</Link> 
           ):(        
             <button className="py-3 pl-6 border-b hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>LOG OUT</button>  
           )

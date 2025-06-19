@@ -35,10 +35,10 @@ module.exports.addProduct = async (req, res) => {
     const productData = req.body;
     const { name, desc, price, sizes, categories } = productData;
     const image = req.file?.path;
-
-    console.log("req.body:", req.body);
-    console.log("req.file:", req.file);
-    
+    // Ensure these are always arrays
+    const parsedSizes = Array.isArray(sizes) ? sizes : [sizes];
+    const parsedCategories = Array.isArray(categories) ? categories : [categories];
+        
     if (!name || !desc || !image || !price || !sizes || !categories) {
       return res.status(400).json({ message: 'Missing required product fields' });
     }
@@ -48,8 +48,8 @@ module.exports.addProduct = async (req, res) => {
       desc,
       image,
       price,
-      sizes,
-      categories
+      sizes:parsedSizes,
+      categories:parsedCategories
     });
 
     const createdProduct = await product.save();
@@ -70,34 +70,48 @@ module.exports.getAllProducts = async (req, res) => {
   }
 };
 
+module.exports.updateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const productData = req.body;
+    const { name, desc, price, sizes, categories } = productData;
+    const image = req.file?.path;
+    const parsedSizes = Array.isArray(sizes) ? sizes : [sizes];
+    const parsedCategories = Array.isArray(categories) ? categories : [categories];
 
-module.exports.updateProduct = async (req,res) => {
-    try {
-        const { id } = req.params;
-    
-        if (!mongoose.isValidObjectId(id)) {
-          return res.status(400).json({ message: "Invalid product ID" });
-        }
-    
-        const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
-          new: true,
-          runValidators: true,
-          upsert:false,
-        });
-    
-        if (!updatedProduct) {
-          return res.status(404).json({ message: "Product not found" });
-        }
-    
-        return res.status(200).json({
-          message: "Product updated successfully",
-          product: updatedProduct,
-          success: true,
-        });
-      } catch (err) {
-        res.status(500).json({ message: "Internal server error", error: err.message });
-      }
-}
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({ message: "Invalid product ID" });
+    }
+
+    const updatedFields = {
+       name, 
+       desc, 
+       price,
+      sizes:parsedSizes, 
+      categories:parsedCategories,
+      ...(image && { image }) ,
+    };
+
+    const updatedProduct = await Product.findByIdAndUpdate(id, updatedFields, {
+      new: true,
+      runValidators: true,
+      upsert: false,
+    });
+
+    if (!updatedProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    return res.status(200).json({
+      message: "Product updated successfully",
+      product: updatedProduct,
+      success: true,
+    });
+  } catch (err) {
+    console.error("Update failed:", err);
+    res.status(500).json({ message: "Internal server error", error: err.message });
+  }
+};
 
 module.exports.deleteProduct = async (req,res) =>{
     try {

@@ -44,7 +44,7 @@ const  UploadProduct = () => {
       
         const handleSubmit = async (e) => {
           e.preventDefault();
-          if(!admin){
+          if(admin == null){
             navigate("/signin");
             alert("Your are not Sign In");
           }
@@ -54,8 +54,10 @@ const  UploadProduct = () => {
           formData.append('name', product.name);
           formData.append('desc', product.desc);
           formData.append('price', product.price);
-          formData.append('sizes', JSON.stringify(product.sizes.split(',').map(s => s.trim())));
-          formData.append('categories', JSON.stringify(product.categories.split(',').map(s => s.trim())));
+          const sizesArray = product.sizes.split(',').map(s => s.trim());
+          sizesArray.forEach(size => formData.append('sizes[]', size));
+          const categoriesArray = product.categories.split(',').map(c => c.trim());
+          categoriesArray.forEach(category => formData.append('categories[]', category)); 
           formData.append('image', product.image);
       
           try {
@@ -74,7 +76,7 @@ const  UploadProduct = () => {
             image: null,
           });
           } catch (err) {
-            console.error(err.response?.data || err.message);
+            alert(err.response?.data || err.message);
           }
         }
         };
