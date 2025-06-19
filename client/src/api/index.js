@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5050/api",
+  baseURL: "https://stylique-backend.onrender.com/api",
 });
 
 export  const userSignUp = async (data) => await API.post("/register", data,{ withCredentials: true });
