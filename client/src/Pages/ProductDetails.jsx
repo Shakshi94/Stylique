@@ -7,7 +7,7 @@ import {addToCart} from '../redux/reducers/cartSlice'
 const ProductDetails = () => {
 
   const { id } = useParams();
-  const [selectedSize, setSelectedSize] = useState({});
+  const [selectedSize, setSelectedSize] = useState('');
   const [product, setProduct] = useState({});
   const user = useSelector(state => state.user.currentUser)
   const dispatch = useDispatch();
@@ -15,9 +15,15 @@ const ProductDetails = () => {
 
   const handleAddToCart = async () => {
     try {
+          if (!selectedSize) {
+          alert("Please select a size before adding to cart.");
+          return;
+        }
       if(user!=null){
         dispatch(addToCart({...product,selectedSize})); // update global state
         navigate("/cart");
+      }else{
+        alert("Please login to add products to your cart.");
       }
     } catch (error) {
       console.log("Failed to add to cart:", error);
