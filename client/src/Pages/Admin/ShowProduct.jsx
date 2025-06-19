@@ -5,6 +5,8 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import {showProducts,deleteProduct} from '../../api/index'
 import { useSelector } from 'react-redux';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 function ShowProduct() {
 
@@ -108,15 +110,15 @@ function ShowProduct() {
               <td className="px-6 py-3 space-x-2">
                 <button
                   onClick={() => handelEditButton(product._id)}
-                  className="px-3 py-1 text-sm bg-black text-white rounded hover:bg-gray-800"
+                  className="px-3 py-1 rounded hover:bg-gray-800"
                 >
-                  Edit
+                  < EditIcon />
                 </button>
                 <button
                   onClick={() => handelDeleteButton(product._id)}
-                  className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
+                  className="px-3 py-1 border rounded hover:bg-red-600"
                 >
-                  Delete
+                  <DeleteIcon />
                 </button>
               </td>
             )}
