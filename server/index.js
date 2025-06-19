@@ -8,8 +8,10 @@ const productRoutes = require('./routes/product.routes');
 const cookieParser = require('cookie-parser');
 
 // Middleware
+
 app.use(cors({
-    origin: "https://stylique-oque.onrender.com", // your React frontend
+   origin: "https://stylique-oque.onrender.com", // your React frontend
+    // origin: "http://localhost:5173",
     credentials: true
   }));
   

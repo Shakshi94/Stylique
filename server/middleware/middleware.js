@@ -2,10 +2,10 @@ const User = require('../modal/user.modal.js');
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
 
-module.exports.verifyToken = async (req, res) => {
+module.exports.verifyToken = async (req, res, next) => {
   try {
     const token = req.cookies.token;
-    console.log(token);
+
     if (!token) {
       return res.status(401).json({ message: 'Token is missing' });
     }
@@ -18,9 +18,9 @@ module.exports.verifyToken = async (req, res) => {
       const user = await User.findById(data.id);
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
-      }else{
-        return res.status(200).json({status:true});
       }
+      req.user=user;
+      next(); 
     });
 
   } catch (err) {
