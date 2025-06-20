@@ -6,9 +6,9 @@ const upload = multer({ storage });
 const {verifyToken} = require('../middleware/middleware');
 const productController  = require('../controllers/product.controller');
 
-router.post('/add',upload.single('image'), productController.addProduct);
-router.get('/show',productController.getAllProducts);
-router.put('/edit/:id',upload.single('image'), productController.updateProduct);
-router.delete('/delete/:id', productController.deleteProduct);
+router.post('/add',verifyToken,upload.single('image'), productController.addProduct);
+router.get('/show',verifyToken,productController.getAllProducts);
+router.put('/edit/:id',verifyToken,upload.single('image'), productController.updateProduct);
+router.delete('/delete/:id',verifyToken, productController.deleteProduct);
 
 module.exports = router;

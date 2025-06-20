@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import {showProducts} from '../api/index'
 import {useNavigate} from 'react-router-dom';
-
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const Collection = () => {
 
   const [product,setProduct] = useState([]);
@@ -30,11 +30,7 @@ const Collection = () => {
       <div className="min-w-60">
         <p className="my-2 text-xl flex items-center cursor-pointer gap-2">
           FILTERS
-          <img
-            className="h-3 sm:hidden"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAkCAYAAACJ8xqgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEJwAABCcASbNOjQAAAGASURBVEhLrZa7cYQwFEX5RiRbwpawLoEEhtAVeN2BOzCuxHYFJMzwSWjBJVCCIzLA74KQWRAgBGcG0GOGw9WHERrIsizM8/y9Kw6iJ0lyN03zk9Wh53kfrK2EQbywNgjxAtZWwqiq6pmuP32paUh7RKrjFEXRxXGcgpo31KCu69cgCL5YKU0nBGdJuRBQV6/UZUiv/Z390gchEEnbtn3yfZ+P8xoGu3IoTUmpXGqW/Z1OWNBa5UOxxizhwDRp0zS/uq67W0kXhUBFuioEe6WbQiCSYqIw3qjHzCZFxHSi6HO90FHgRajHSCUcmCallCWldcdJdwnBlnS3EKxJlYQgjuObZVkFxhP1IJWaFBG2bWu0fFj1j5IQXSZZRMdDOqUunzoppy4bGRmQEk5lJFr8njeFe2RgVbhXBhaFKjIgFKrKwEw4lQGaUbVNCnuzQHaXlQEuHG30U9k3K6Xouiz6a1CRAf1MGTDOlAGDlgR/mDaityMyDi2VME3TE36JNe0PEvQ33QXCa5oAAAAASUVORK5CYII="
-            alt=""
-          />
+          <ArrowForwardIosIcon className="h-3 sm:hidden"/>
         </p>
 
         {/* Filters - CATEGORIES */}

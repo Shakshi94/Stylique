@@ -90,13 +90,11 @@ function ShowProduct() {
               <td className="px-6 py-3 space-x-2">
                 <button
                   onClick={() => handelEditButton(product._id)}
-                  className="px-3 py-1"
                 >
                   < EditIcon />
                 </button>
                 <button
                   onClick={() => handelDeleteButton(product._id)}
-                  className="px-3 py-1"
                 >
                   <DeleteIcon />
                 </button>

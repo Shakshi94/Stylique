@@ -13,7 +13,7 @@ const userSlice = createSlice({
     loginSuccess: (state, action) => {
       state.currentUser = action.payload.user;
       state.token= action.payload.token;
-      document.cookie = `token=${action.payload.token}; path=/; max-age=${7 * 24 * 60 * 60}`;
+      document.cookie = `token=${action.payload.token}; path=/; max-age=${7 * 24 * 60 * 60};SameSite=None'Secure`;
     },
     logout: (state) => {
       state.currentUser = null;
