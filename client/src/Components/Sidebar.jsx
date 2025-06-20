@@ -50,7 +50,7 @@ const SideBar = ({mobileOpen, setMobileOpen}) => {
              Sign in
             </Link>
             ):(
-            <button className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700" onClick={handleLogout}>
+            <button className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700 hover:bg-gray-800" onClick={handleLogout}>
               <LogoutIcon className="h-6 w-6 mr-2"/>
               Log out
             </button>
@@ -67,13 +67,13 @@ const SideBar = ({mobileOpen, setMobileOpen}) => {
           <p>Back</p>
         </div>
         <div className="flex flex-col text-gray-700 font-medium">
-          <Link to="/admin/dashboard" className="py-3 pl-6 border-b hover:bg-gray-100 cursor-pointer" onClick={() => setMobileOpen(false)}>DASHBOARD</Link>
-          <Link to="/admin/addproduct" className="py-3 pl-6 border-b hover:bg-gray-100 cursor-pointer" onClick={() => setMobileOpen(false)}>ADD PRODUCT</Link>
-          <Link to="/admin/showproducts" className="py-3 pl-6 border-b hover:bg-gray-100 cursor-pointer" onClick={() => setMobileOpen(false)}>SHOW PRODUCT</Link>
+          <Link to="/admin/dashboard" className="py-3 pl-6 border-b hover:bg-gray-400 cursor-pointer" onClick={() => setMobileOpen(false)}>DASHBOARD</Link>
+          <Link to="/admin/addproduct" className="py-3 pl-6 border-b hover:bg-gray-400 cursor-pointer" onClick={() => setMobileOpen(false)}>ADD PRODUCT</Link>
+          <Link to="/admin/showproducts" className="py-3 pl-6 border-b hover:bg-gray-400 cursor-pointer" onClick={() => setMobileOpen(false)}>SHOW PRODUCT</Link>
           {admin==null ? (
-            <Link to="/signin" className="py-3 pl-6 border-b hover:bg-gray-100 cursor-pointer text-left" onClick={() => setMobileOpen(false)}>LOG IN</Link> 
+            <Link to="/signin" className="py-3 pl-6 border-b hover:bg-gray-400 cursor-pointer text-left" onClick={() => setMobileOpen(false)}>LOG IN</Link> 
           ):(        
-            <button className="py-3 pl-6 border-b hover:bg-gray-100 cursor-pointer text-left" onClick={handleLogout}>LOG OUT</button>  
+            <button className="py-3 pl-6 border-b hover:bg-gray-400 cursor-pointer text-left" onClick={handleLogout}>LOG OUT</button>  
           )
           }
         </div>
