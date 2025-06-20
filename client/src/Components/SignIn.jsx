@@ -4,7 +4,6 @@ import {useDispatch} from 'react-redux';
 import {loginSuccess} from '../redux/reducers/userSlice';
 import {Link,useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
-
 const SignIn = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -38,7 +37,8 @@ const SignIn = () => {
         const response = await userSignIn(formData);
 
         if (response.data.success) {
-          dispatch(loginSuccess({ user: response.data.user }));
+
+          dispatch(loginSuccess({ user: response.data.user,token:response.data.token }));
     
           const Toast = Swal.mixin({
             toast: true,
@@ -69,7 +69,8 @@ const SignIn = () => {
             text: response.data.message || "Wrong credentials",
           });
           setFormData({ email: '', password: '' });
-        }
+        
+      }
       } catch (error) {
         // Catch network/server/authorization errors here
         console.error("Login error:", error);

@@ -2,12 +2,10 @@ import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { useOutletContext } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import AdminNavbar from '../../Components/AdminNavbar';
 
 const AdminDashboard = () => {
-  const { setMobileOpen } = useOutletContext();
   const admin = useSelector((state) => state.user.currentUser);
 
   return (

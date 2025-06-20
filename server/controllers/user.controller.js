@@ -42,8 +42,8 @@ module.exports.register = async (req, res) => {
       message: 'User created successfully',
       success: true,
       user: newUser,
-      
     });
+
   } catch (err) {
     res.status(500).json({ message: 'Internal Server Error', error: err.message });
   }
@@ -69,7 +69,7 @@ module.exports.login = async (req, res) => {
         const token = createSecretToken(user._id);
         res.cookie('token', token, {
             withCredentials: true,
-            httpOnly: false,
+            httpOnly: true,
             sameSite: "None",
             secure:true,
         });
@@ -77,7 +77,8 @@ module.exports.login = async (req, res) => {
             message: 'User logged in successful',
             role: user.role,
             success: true,
-            user:user
+            user:user,
+            token:token
         });
 
     }catch (err) {
@@ -87,7 +88,8 @@ module.exports.login = async (req, res) => {
 
 module.exports.logout = async (req, res) => {
   try {
-    res.clearCookie('token', { withCredentials: true, httpOnly: false });
+    res.clearCookie('token', { httpOnly: false , sameSite: "None",
+      secure: true });
     res.status(200).json({ message: 'User logged out successfully', success: true });
   } catch (err) {
     res.status(500).json({ message: 'Internal Server Error', error: err.message });
