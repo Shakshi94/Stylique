@@ -2,7 +2,6 @@ import React, { useState,useEffect } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { useNavigate, useOutletContext } from 'react-router-dom';
 import {showProducts,deleteProduct} from '../../api/index'
 import { useSelector } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -11,7 +10,6 @@ import AdminNavbar from '../../Components/AdminNavbar';
 
 function ShowProduct() {
 
-    const { setMobileOpen } = useOutletContext();
     const [products,setProduct] = useState([]);
     const admin = useSelector((state) => state.user.currentUser);
 

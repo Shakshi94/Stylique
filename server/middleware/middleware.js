@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 module.exports.verifyToken = async (req, res) => {
   try {
     const token = req.cookies.token;
-
+    console.log(token);
     if (!token) {
       return res.status(401).json({ message: 'Token is missing' });
     }

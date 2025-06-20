@@ -6,9 +6,10 @@ module.exports.addProduct = async (req, res) => {
   try {
 
     const productData = req.body;
+    console.log(productData);
     const { name, desc, price, sizes, categories } = productData;
     const image = req.file?.path;
-    // Ensure these are always arrays
+    
     const parsedSizes = Array.isArray(sizes) ? sizes : [sizes];
     const parsedCategories = Array.isArray(categories) ? categories : [categories];
         
@@ -25,8 +26,9 @@ module.exports.addProduct = async (req, res) => {
       categories:parsedCategories
     });
 
+    console.log("data updated 1");
     const createdProduct = await product.save();
-
+    console.log("data updated 2");
     return res.status(201).json({ message: "Product added successfully", success: true, product: createdProduct });
 
   } catch (err) {
@@ -51,7 +53,7 @@ module.exports.updateProduct = async (req, res) => {
     const image = req.file?.path;
     const parsedSizes = Array.isArray(sizes) ? sizes : [sizes];
     const parsedCategories = Array.isArray(categories) ? categories : [categories];
-
+    
     if (!mongoose.isValidObjectId(id)) {
       return res.status(400).json({ message: "Invalid product ID" });
     }
@@ -89,7 +91,7 @@ module.exports.updateProduct = async (req, res) => {
 module.exports.deleteProduct = async (req,res) =>{
     try {
         const { id } = req.params;
-    
+        console.log("Deleted Product id is",id);
         if (!mongoose.isValidObjectId(id)) {
           return res.status(400).json({ message: "Invalid product ID" });
         }
@@ -105,6 +107,7 @@ module.exports.deleteProduct = async (req,res) =>{
           success: true,
           product: deletedProduct,
         });
+
       } catch (err) {
         res.status(500).json({ message: "Internal server error", error: err.message });
       }
