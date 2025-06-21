@@ -23,9 +23,9 @@ function App() {
         {/* Public/User Routes */}
         <Route element={<UserLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/collection" element={<ProtectedRoute customerOnly={true}><Collection /></ProtectedRoute>} />
-          <Route path="/collection/:id" element={<ProtectedRoute customerOnly={true}><ProductDetails /></ProtectedRoute>} />
-          <Route path="/cart" element={<ProtectedRoute customerOnly={true}><Cart /></ProtectedRoute>} />
+          <Route path="/collection" element={<Collection />} />
+          <Route path="/collection/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
         </Route>
