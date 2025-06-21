@@ -7,7 +7,7 @@ import AdminNavbar from '../../Components/AdminNavbar';
 
 const AdminDashboard = () => {
   const admin = useSelector((state) => state.user.currentUser);
-
+  console.log(admin);
   return (
     <div className="flex flex-col flex-1 overflow-y-auto bg-gray-50 min-h-screen">
       {/* Top Navbar */}

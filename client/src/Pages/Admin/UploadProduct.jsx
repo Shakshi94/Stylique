@@ -43,11 +43,6 @@ const  UploadProduct = () => {
       
         const handleSubmit = async (e) => {
           e.preventDefault();
-          if(admin == null){
-            navigate("/signin");
-            alert("Your are not Sign In");
-          }
-          else{
           if (!validateInput()) return;
           const formData = new FormData();
           formData.append('name', product.name);
@@ -77,7 +72,6 @@ const  UploadProduct = () => {
           } catch (err) {
             alert(err.response?.data || err.message);
           }
-        }
         };
     return (
       <div className="flex flex-col flex-1 overflow-y-auto bg-gray-50 min-h-screen">

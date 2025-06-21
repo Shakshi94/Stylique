@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { useOutletContext, useParams } from 'react-router-dom';
+import {useParams } from 'react-router-dom';
 import { showProduct, editProduct } from '../../api/index';
 import AdminNavbar from '../../Components/AdminNavbar';
 
 const EditProduct = () => {
-  const { setMobileOpen } = useOutletContext();
   const { id } = useParams();
 
   const [product, setProduct] = useState({
