@@ -3,14 +3,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { addProduct } from '../../api/index';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import AdminNavbar from '../../Components/AdminNavbar';
 
 const  UploadProduct = () => {
 
-      const admin = useSelector((state) => state.user.currentUser);
-      const navigate = useNavigate();
 
       // Optional: Form state if you want to handle it
       const [product, setProduct] = useState({
